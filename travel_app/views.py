@@ -2,7 +2,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response
-from travel_app.forms import ProfileUserCreationForm
+from travel_app.forms import ProfileUserCreationForm, ListForm
+from travel_app.models import List
 from wanderful import settings
 
 
@@ -36,5 +37,14 @@ def register(request):
 
 
 def list_it(request):
+    #list_form = ListForm()
+    if request.method == "POST":
+        list_form = ListForm(request.POST)
 
-    return render(request, 'lists/list_it.html')
+        if list_form.is_valid():
+            list = List.objects.create(list_name=list_form.cleaned_data['list_name'],
+                                       profile=request.user)
+    data = {"list_form": ListForm(),
+            "all_list": List.objects.filter(profile=request.user)}
+
+    return render(request, 'lists/list_it.html', data)

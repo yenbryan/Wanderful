@@ -16,8 +16,12 @@ class Location(models.Model):
 
 
 class List(models.Model):
-    profile = models.ForeignKey(Profile, related_name="lists")
-    location = models.ManyToManyField(Location, related_name="lists")
+    profile = models.ForeignKey(Profile,
+                                related_name="lists")
+    location = models.ManyToManyField(Location,
+                                      related_name="lists",
+                                      null=True,
+                                      blank=True)
     list_name = models.CharField(max_length=60)
 
     def __unicode__(self):
@@ -25,7 +29,10 @@ class List(models.Model):
 
 
 class Picture(models.Model):
-    image = models.ImageField(upload_to='travel_images', blank=True, null=True)
+    image = models.ImageField(upload_to='travel_images',
+                              blank=True,
+                              null=True)
     description = models.CharField(max_length=140)
-    location = models.ForeignKey(Location, related_name="pictures")
+    location = models.ForeignKey(Location,
+                                 related_name="pictures")
 

@@ -882,3 +882,10 @@ body {
 .hack-color {
  color: #fff;
 }
+
+ul {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+    color: #fff;
+}

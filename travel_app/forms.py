@@ -44,3 +44,8 @@ class LoginForm(AuthenticationForm):
 class ResetPWord(PasswordResetForm):
     email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class': 'form-control',
                                                                           'placeholder': 'your email *'}))
+
+
+class ListForm(forms.Form):
+    list_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control',
+                                                                          'placeholder': 'enter the list name *'}))
