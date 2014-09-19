@@ -1,0 +1,11 @@
+<form method="post" action="./">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ location_form }}
+                        </div>
+                        <button class="btn btn-xl" type="submit">List it</button>
+</form>
+
+{% for location in locations %}
+    {{ location.address }}
+{% endfor %}

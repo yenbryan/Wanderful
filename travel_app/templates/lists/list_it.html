@@ -29,7 +29,7 @@
                     <ul>
                     {% if all_list %}
                         {% for list in all_list %}
-                            <li><h4>{{ list.list_name }}</h4></li>
+                            <li><h4><a href="{% url 'view_list' list.slug_name %}">{{ list.list_name }}</a></h4></li>
                         {% endfor %}
                     {% else %}
                         <li><h2>Please create a list </h2></li>

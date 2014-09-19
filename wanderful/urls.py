@@ -1,7 +1,10 @@
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from djgeojson.views import GeoJSONLayerView
 from travel_app.forms import LoginForm, ResetPWord
+#from travel_app.models import MushroomSpot
+
 from wanderful import settings
 
 urlpatterns = patterns('',
@@ -25,7 +28,16 @@ urlpatterns = patterns('',
     #registration shit
     url(r'register/$', 'travel_app.views.register', name='register'),
 
-    url(r'list_it/$', 'travel_app.views.list_it', name='list_it'),
+    url(r'list-it/$', 'travel_app.views.list_it', name='list_it'),
+    url(r'view-list/(?P<list_slug>[\w-]+)/$', 'travel_app.views.view_list', name='view_list'),
+    url(r'edit-list/(?P<list_slug>[\w-]+)/edit$', 'travel_app.views.edit_list', name='edit_list'),
+
+    url(r'location/$', 'travel_app.views.location', name='location'),
+
+    url(r'view-location/(?P<location_id>\d+)/$', 'travel_app.views.view_location', name='view_location'),
+    url(r'edit-location/(?P<location_id>\d+)/edit$', 'travel_app.views.edit_location', name='edit_location'),
+
+    url(r'upload/picture/(?P<location_id>\d+)/$', 'travel_app.views.upload_picture', name="upload_picture"),
 )
 
 if settings.DEBUG:

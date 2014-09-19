@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm
 from django import forms
-from travel_app.models import Profile
+from django.forms import ModelForm
+from travel_app.models import Profile, Picture
 
 
 class ProfileUserCreationForm(UserCreationForm):
@@ -32,13 +33,14 @@ class ProfileUserCreationForm(UserCreationForm):
             code='duplicate_username',
         )
 
+
 class LoginForm(AuthenticationForm):
     username = forms.CharField(required=True,
                                widget=forms.TextInput(attrs={'class': 'form-control',
-                                                            'placeholder': 'your username *'}))
-    password = forms.CharField(label=("Password"),
+                                                             'placeholder': 'your username *'}))
+    password = forms.CharField(label="Password",
                                widget=forms.PasswordInput(attrs={'class': 'form-control',
-                                                                'placeholder': 'password *'}))
+                                                                 'placeholder': 'password *'}))
 
 
 class ResetPWord(PasswordResetForm):
@@ -48,4 +50,19 @@ class ResetPWord(PasswordResetForm):
 
 class ListForm(forms.Form):
     list_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control',
-                                                                          'placeholder': 'enter the list name *'}))
+                                                                             'placeholder': 'enter the list name *'}))
+
+
+class LocationForm(forms.Form):
+    name = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control',
+                                                                        'placeholder': 'enter the location name *'}))
+    address = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control',
+                                                                           'placeholder': 'enter the address *'}))
+
+
+class PictureForm(forms.Form):
+    picture = forms.ImageField()
+    description = forms.CharField(max_length=125, widget=forms.TextInput(attrs={'class': 'form-control',
+                                                                                'placeholder': 'description'}))
+
+
